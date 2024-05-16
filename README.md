@@ -86,12 +86,9 @@
   cd chat-app-frontend
   ```
   ```less
-  npm install axios
+  npm install
   ```
   ```less
-   npm install react-router-dom
-  ```
-  ```less
-  npm start
+  npm run build && npm start
   ```
   

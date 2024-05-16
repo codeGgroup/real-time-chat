@@ -7,7 +7,17 @@ const authRoutes = require('./routes/authRoutes');
 const messageRoutes = require('./routes/messageRoute');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+    onPreflightRequest: (req, res) => {
+        console.log('Received CORS prelight request: ', req.method, req.url);
+    },
+    onOrigin: (origin, callback) => {
+        console.log('Checking origin:', origin);
+        callback(null, true);
+    }
+}));
 app.use(express.json());
 
 mongoose.connect('mongodb://localhost:27017/chat-app', {
@@ -46,6 +56,11 @@ function startServer() {
             // Serve the React frontend
             res.sendFile(path.join(__dirname, '../chat-app-frontend', 'build', 'index.html'));
         }
+    });
+
+    app.use((req, res) => {
+        console.error('Unknown route:', req.url);
+        res.status(404).json({ message: 'Not found' });
     });
 
     app.listen(3002, () => {
