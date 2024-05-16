@@ -16,30 +16,39 @@ mongoose.connect('mongodb://localhost:27017/chat-app', {
 })
     .then(() => {
         console.log('Connected to MongoDB');
-        app.listen(3001, () => {
-            console.log('Server started on port 3001')
-        })
+        startServer();
     })
     .catch((error) => {
         console.error('Error connecting to MongoDB:', error);
         process.exit(1);
     });
 
-// Serve the API routes
-app.use('/api/auth', authRoutes);
-app.use('/api/messages', messageRoutes);
+function startServer() {
+    // Serve the API routes
+    app.use('/api/auth', authRoutes);
+    app.use('/api/messages', messageRoutes);
+    app.use('/api/health', (req, res) => {
+        if (mongoose.connection.readyState === 1) {
+            res.status(200).json({ message: 'DB connected' });
+        } else {
+            res.status(503).json({ message: 'DB is not connected' });
+        }
+    });
 
-// Serve the React frontend
-app.use(express.static(path.join(__dirname, '../chat-app-frontend/build')));
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../chat-app-frontend', 'build', 'index.html'));
-});
+    // Serve the React frontend
+    app.use(express.static(path.join(__dirname, '../chat-app-frontend/build')));
 
-// testing if db is connected
-app.get('/health', (req, res) => {
-    if (mongoose.connection.readyState === 1){
-        res.status(200).json({ message: 'DB connected'});
-    } else {
-        res.status(503).json({ message: 'DB is not connected'});
-    }
-});
+    app.get('/*', (req, res) => {
+        if (req.path.startsWith('/api/')) {
+            // Serve the API routes
+            return;
+        } else {
+            // Serve the React frontend
+            res.sendFile(path.join(__dirname, '../chat-app-frontend', 'build', 'index.html'));
+        }
+    });
+
+    app.listen(3002, () => {
+        console.log('Server started on port 3002');
+    });
+}
