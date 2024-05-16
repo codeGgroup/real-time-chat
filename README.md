@@ -4,15 +4,15 @@
   ```shell
   git clone https://github.com/codeGgroup/real-time-chat.git
   ```
-    - Identify your feature and checkout to the branch that concerns it. E.g if you're working on the `View contact info`
-      issue. You can do,
-      ```shell
-      git branch --all
-      ```
-      to see all the branches, then choose which one concerns you feature and checkout to it like this:
-      ```shell
-      git checkout 12-view-contact-info
-      ```
+  - Identify your feature and checkout to the branch that concerns it. E.g if you're working on the `View contact info`
+    issue. You can do,
+    ```shell
+    git branch --all
+    ```
+    to see all the branches, then choose which one concerns you feature and checkout to it like this:
+    ```shell
+    git checkout 12-view-contact-info
+    ```
 - Create the files your need and start working.
 - When you're done, do a commit and push
   ```shell
@@ -36,6 +36,7 @@
   ```shell
   git push -u origin <branch-name>
   ```
+
 ## Setup the project
 - Install MongoDB and create a database using Mongo CLI (UBUNTU)
   ```shell
@@ -79,7 +80,7 @@
   ```shell
   curl http://localhost:3002/health
   ```
-  if the output is `{ "message": "DB not connected" }`, then the db is connected.
+  if the output is `{ "message": "DB connected" }`, then the db is connected.
 - Install frontend dependencies
   ```less
   cd chat-app-frontend
