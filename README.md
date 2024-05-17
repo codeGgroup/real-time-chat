@@ -36,5 +36,62 @@
   ```shell
   git push -u origin <branch-name>
   ```
-## Setup
 
+## Setup the project
+- Install MongoDB and create a database using Mongo CLI (UBUNTU)
+  ```shell
+  sudo apt-get install gnupg curl
+  ```
+  ```shell
+  curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \
+     sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg \
+     --dearmor
+  ```
+  ```shell
+  sudo touch /etc/apt/sources.list.d/mongodb-org-7.0.list file for Ubuntu 22.04
+  ```
+  ```shell
+  echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+  ```
+  ```shell
+  sudo apt-get install -y mongodb-org
+  ```
+  ```less
+  https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
+  ```
+- Create DB
+  ```less
+  mongosh
+  ```
+  ```less
+  use chat-app
+  ```
+- Run the backend
+  ```shell
+  cd server
+  ```
+  ```shell
+  npm install
+  ```
+  ```shell
+  node server.js
+  ```
+- Check if the database is connected
+  ```shell
+  curl http://localhost:3002/health
+  ```
+  if the output is `{ "message": "DB connected" }`, then the db is connected.
+- Install frontend dependencies
+  ```less
+  cd chat-app-frontend
+  ```
+  ```less
+  npm install axios
+  ```
+  ```less
+   npm install react-router-dom
+  ```
+  ```less
+  npm start
+  ```
+  
