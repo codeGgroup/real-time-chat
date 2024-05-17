@@ -7,6 +7,7 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
     console.log('Received request to /api/auth/register');
     console.log('Request body:', req.body);
+    console.log('Request body:', JSON.stringify(req.body));
 
     const { username, email, password } = req.body;
 
@@ -47,7 +48,37 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    // user login logic
+    console.log('Received request to /api/auth/login');
+    console.log('Request body:', req.body);
+
+    const { email, password } = req.body;
+
+    try {
+        // Fetch the user from the database
+        const user = await User.findOne(
+            {email: email},
+            {email: 1, password: 1},
+            {lean: true}
+        );
+        console.log("User object:", user);
+        if (!user) {
+            console.error('Invalid email or password');
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        // Compare the provided password with the stored hashed password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            console.error('Invalid email or password');
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        // Login successful
+        res.status(200).json({ message: 'Login successful!', });
+    } catch (error) {
+        console.error('Error logging in user', error);
+        res.status(500).json({ message: 'An error occurred. Please try again later' });
+    }
 });
 
 module.exports = router;

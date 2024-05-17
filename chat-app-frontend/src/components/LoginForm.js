@@ -7,9 +7,35 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
+    const loginUser = async (useData) =>  {
+        try {
+            const response = await axios.post('http://localhost:3002/api/auth/login', useData);
+            if(response.status === 200){
+                window.location.href = '/';
+                return { success: true, message: 'Login successful!' };
+            } else {
+                return { success: false, message: response.data.message };
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                return { success:false, message: error.response.data.message };
+            } else {
+                return { success: false, message: 'An error occurred. Please try again later.' };
+            }
+        }
+    }
     const handleSubmit = async (event) => {
         event.preventDefault();
-    //     login logic
+        try {
+            const { success, message } = await loginUser({email, password});
+            if (success){
+                window.location.href = '/';
+            } else {
+                setMessage(message);
+            }
+        } catch (error){
+            setMessage('An error occurred. Please try again later.');
+        }
     };
 
     return (
