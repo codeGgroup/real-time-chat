@@ -1,3 +1,10 @@
+## Project design and branching strategy
+- Design
+![WhatsApp Image 2024-05-14 at 3 19 32 PM](https://github.com/codeGgroup/real-time-chat/assets/153357889/bcc80f72-3950-4aca-aed7-a1ad43ec62e5)
+
+- Branch strategy
+![Screenshot from 2024-05-14 15-35-51](https://github.com/codeGgroup/real-time-chat/assets/153357889/a339a88d-2d09-4a1b-9527-36d00be96a6e)
+
 ## Getting started
 
 - Clone the repository
