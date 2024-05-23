@@ -4,6 +4,7 @@ import {
     faEllipsis,
     faVideoSlash,
     faPenToSquare,
+    faMagnifyingGlass,
 }  from '@fortawesome/free-solid-svg-icons';
 
 const HomeSideBar = () => {
@@ -16,6 +17,10 @@ const HomeSideBar = () => {
                     <FontAwesomeIcon className="icon" icon={faVideoSlash} />
                     <FontAwesomeIcon className="icon" icon={faPenToSquare} />
                 </div>
+            </div>
+            <div className="searchbar">
+                <FontAwesomeIcon className="icon" icon={faMagnifyingGlass} />
+                <input name="search" placeholder="Search" />
             </div>
         </div>
     );

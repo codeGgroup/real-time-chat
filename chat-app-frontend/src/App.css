@@ -38,6 +38,28 @@
   border-radius: 20px;
   padding: 10px;
   cursor: pointer;
+  margin-bottom: 15px;
+}
+.home-container .sidebar .searchbar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  background: var(--color-grey);
+  border-radius: 20px;
+  padding: 10px;
+}
+.home-container .sidebar .searchbar .icon{
+  width: 10%;
+  cursor: pointer;
+}
+.home-container .sidebar .searchbar input{
+  width: 90%;
+  padding: 3px;
+  border: none;
+  background: var(--color-grey);
+}
+.home-container .sidebar .searchbar input:focus{
+  outline: none;
 }
 .home-container .chatarea {
   display: flex;
