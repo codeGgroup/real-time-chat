@@ -92,6 +92,10 @@
   ```less
   cd chat-app-frontend
   ```
+  ```shell
+  npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
+  
+  ```
   ```less
   npm install
   ```
