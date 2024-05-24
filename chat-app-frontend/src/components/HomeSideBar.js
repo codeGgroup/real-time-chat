@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fetchUsers } from "../api";
 import {
     faEllipsis,
     faVideoSlash,
     faPenToSquare,
     faMagnifyingGlass,
-}  from '@fortawesome/free-solid-svg-icons';
+} from '@fortawesome/free-solid-svg-icons';
+import ChatList from "./ChatList";
 
 const HomeSideBar = () => {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const usersList = await fetchUsers();
+                setUsers(usersList);
+            } catch (err) {
+                console.error('Error fetching users:', err);
+            }
+        };
+        fetchUserData();
+    }, []);
+
     return (
         <div className="sidebar">
             <div className="topbar">
@@ -22,8 +38,11 @@ const HomeSideBar = () => {
                 <FontAwesomeIcon className="icon" icon={faMagnifyingGlass} />
                 <input name="search" placeholder="Search" />
             </div>
+            <div className="contacts">
+                <ChatList users={users} />
+            </div>
         </div>
     );
-}
+};
 
 export default HomeSideBar;

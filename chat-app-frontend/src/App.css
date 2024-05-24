@@ -61,6 +61,16 @@
 .home-container .sidebar .searchbar input:focus{
   outline: none;
 }
+.home-container .sidebar .contacts {
+  padding: 15px 0;
+}
+.home-container .sidebar .contacts .chat-item{
+  background: var(--color-grey);
+}
+.home-container .sidebar .contacts .chat-item .name {
+  padding: 3px 0;
+  font-size: 14px;
+}
 .home-container .chatarea {
   display: flex;
   flex-flow: column;
