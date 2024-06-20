@@ -1,17 +1,9 @@
 const express = require('express');
-
-const ChatMessage = require('../models/ChatMessage');
-
 const router = express.Router();
+const {sendMessageHandler, getMessagesHandler} = require('../controllers/messageController')
 
-// Fetch chat messages
-router.get('/', async (req, res) => {
-    // fetch message logic
-});
-
-//send a chat message
-router.post('/', async (req, res) => {
-    // send message logic
-});
+// Define your message-related routes here
+router.post('/', sendMessageHandler);
+router.get('/', getMessagesHandler);
 
 module.exports = router;

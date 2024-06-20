@@ -1,16 +1,8 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-
 const router = express.Router();
-
-router.post('/register', async (req, res) => {
-    // user registration logic
-});
-
-router.post('/login', async (req, res) => {
-    // user logic logic
-});
+const { loginHandler, registerHandler } = require('../controllers/authController')
+// Define your authentication routes here
+router.post('/login', loginHandler);
+router.post('/register', registerHandler);
 
 module.exports = router;
